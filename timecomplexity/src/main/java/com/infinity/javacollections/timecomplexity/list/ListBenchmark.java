@@ -1,4 +1,4 @@
-package com.infinity.javacollections.timecomplexity.Benchmark;
+package com.infinity.javacollections.timecomplexity.list;
 
 import com.infinity.javacollections.timecomplexity.domain.Employee;
 import org.openjdk.jmh.annotations.*;
@@ -8,6 +8,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,10 +16,11 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 10)
 @Measurement(iterations = 20)
-public class ArrayListBenchMark {
+public class ListBenchmark {
     @State(Scope.Thread)
     public static class MyState{
         List<Employee> employeeList = new ArrayList<>();
+        //List<Employee> employeeList = new LinkedList<>();
         long iterations = 100000;
         Employee myEmployee = new Employee(100L, "Tony");
         int employeeIndex = -1;
@@ -33,44 +35,44 @@ public class ArrayListBenchMark {
     }
 
     @Benchmark
-    public void testAdd(ArrayListBenchMark.MyState state){
+    public void testAdd(ListBenchmark.MyState state){
         state.employeeList.add(new Employee(state.iterations + 1, "Loki"));
     }
 
     @Benchmark
-    public void testAddAtTheEnd(ArrayListBenchMark.MyState state){
+    public void testAddAtTheEnd(ListBenchmark.MyState state){
         state.employeeList.add((int)state.iterations, new Employee(state.iterations, "Loki"));
     }
 
     @Benchmark
-    public void testAddAtTheBeggining(ArrayListBenchMark.MyState state){
+    public void testAddAtTheBeggining(ListBenchmark.MyState state){
         state.employeeList.add(0, new Employee(state.iterations, "Loki"));
     }
 
     @Benchmark
-    public Employee testGet(ArrayListBenchMark.MyState state){
+    public Employee testGet(ListBenchmark.MyState state){
         return state.employeeList.get(state.employeeIndex);
     }
 
     @Benchmark
-    public boolean testContains(ArrayListBenchMark.MyState state){
+    public boolean testContains(ListBenchmark.MyState state){
         return state.employeeList.contains(state.myEmployee);
     }
 
     @Benchmark
-    public int testIndexOf(ArrayListBenchMark.MyState state){
+    public int testIndexOf(ListBenchmark.MyState state){
         return state.employeeList.indexOf(state.myEmployee);
     }
 
     @Benchmark
-    public boolean testRemove(ArrayListBenchMark.MyState state){
+    public boolean testRemove(ListBenchmark.MyState state){
         return state.employeeList.remove(state.myEmployee);
     }
 
     public static void main(String[] args) throws RunnerException {
         System.gc();
         Options options = new OptionsBuilder()
-                .include(ArrayListBenchMark.class.getSimpleName()).threads(1)
+                .include(ListBenchmark.class.getSimpleName()).threads(1)
                 .forks(1)
                 .shouldFailOnError(true)
                 .shouldDoGC(true)
