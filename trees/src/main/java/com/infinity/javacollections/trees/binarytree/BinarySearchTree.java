@@ -49,4 +49,12 @@ public class BinarySearchTree {
             System.out.print(currentNode.getValue() + " ");
         }
     }
+
+    public void printPreOrderTraversal(){
+        //TODO: Pending to implement this method
+    }
+
+    public void printPostOrderTraversal(){
+        //TODO: Pending to implement this method
+    }
 }
