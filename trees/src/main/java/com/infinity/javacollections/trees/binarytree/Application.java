@@ -12,7 +12,20 @@ public class Application {
 
         numbersToAdd.forEach(theTree::addTreeNode);
 
+        System.out.println("**********************************");
+        System.out.println("The InOrderTraversal result is: ");
         theTree.printInOrderTraversal();
+        System.out.println("");
+
+        System.out.println("**********************************");
+        System.out.println("The PreOrderTraversal result is: ");
+        theTree.printPreOrderTraversal();
+        System.out.println("");
+
+        System.out.println("**********************************");
+        System.out.println("The PostOrderTraversal result is: ");
+        theTree.printPostOrderTraversal();
+        System.out.println("");
 
     }
 }

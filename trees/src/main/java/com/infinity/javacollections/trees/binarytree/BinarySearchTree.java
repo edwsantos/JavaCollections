@@ -1,5 +1,7 @@
 package com.infinity.javacollections.trees.binarytree;
 
+import com.infinity.javacollections.trees.binarytree.constant.TreeConstants;
+
 import java.util.Optional;
 
 import static java.util.Objects.isNull;
@@ -37,7 +39,7 @@ public class BinarySearchTree {
     public void printInOrderTraversal() {
         Optional.ofNullable(this.rootNode)
                 .ifPresentOrElse(this::printInOrderTraversal,
-                        () -> System.out.println("The BinarySearchTree is empty!"));
+                        () -> System.out.println(TreeConstants.TREE_IS_EMPTY));
     }
 
     private void printInOrderTraversal(TreeNode currentNode){
@@ -51,10 +53,34 @@ public class BinarySearchTree {
     }
 
     public void printPreOrderTraversal(){
-        //TODO: Pending to implement this method
+        Optional.ofNullable(this.rootNode)
+                .ifPresentOrElse(this::printPreOrderTraversal,
+                        () -> System.out.println(TreeConstants.TREE_IS_EMPTY));
+    }
+
+    private void printPreOrderTraversal(TreeNode currentNode){
+        System.out.print(currentNode.getValue() + " ");
+        if(!isNull(currentNode.getLeftChild())){
+            printPreOrderTraversal(currentNode.getLeftChild());
+        }
+        if(!isNull(currentNode.getRightChild())){
+            printPreOrderTraversal(currentNode.getRightChild());
+        }
     }
 
     public void printPostOrderTraversal(){
-        //TODO: Pending to implement this method
+        Optional.ofNullable(this.rootNode)
+                .ifPresentOrElse(this::printPostOrderTraversal,
+                        () -> System.out.println(TreeConstants.TREE_IS_EMPTY));
+    }
+
+    public void printPostOrderTraversal(TreeNode currentNode){
+        if(!isNull(currentNode.getLeftChild())){
+            printPostOrderTraversal(currentNode.getLeftChild());
+        }
+        if(!isNull(currentNode.getRightChild())){
+            printPostOrderTraversal(currentNode.getRightChild());
+        }
+        System.out.print(currentNode.getValue() + " ");
     }
 }
